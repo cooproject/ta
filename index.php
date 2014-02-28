@@ -1,3 +1,6 @@
+<?php
+	require_once("config.php");
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -63,7 +66,20 @@
                     </nav>
                 </div>
             </div>
-
+			
+			<?php
+				try{
+					$db=config::getInstance();
+					$query="SELECT * FROM config";
+					$stmt=$db->prepare($query);
+					$stmt->execute();
+				}catch (Exception $e){
+					$e->getMessage();
+				}
+				while($row=$stmt->fetch()){
+					$data[$row['config_name']] = $row['content'];
+				}
+			?>
             <div class="main-container">
                 <div class="main wrapper clearfix">
 
@@ -83,34 +99,18 @@
 
                     <section id="brideandgroom" class="clearfix">
 
-                        <h1>Mutiara Wedding Organizer</h1>
+                        <h1><?php echo $data['about_us_title']; ?></h1>
                                 
                         <div class="column left">
                             <h2><p>
-                                Mutiara Wedding Organizer Luxury Wedding Planning & Event Design.
+                                <?php echo $data['about_us_tagline']; ?>
                             </h2></p>
 
                         </div><!--end column-->
                         <div class="column right">
 
                             <h2></h2>
-                            <p>
-                                We plan elegant, stylish, glamorous and fun celebrations and are the
-                                Luxury Wedding Planners for savvy, sophisticated couples who demand first
-                                class service and a world-class event.
-                            </p>
-                            <p>When you are to be united in the name of love,
-                                when you want to celebrate the greatest moment of your life,
-                                when you wish to treasure every moment in perfection.
-                            </p>
-                            <p>Mutiara weddings here for you, in every step of way
-                                to bring your wedding dream come to life
-                                and let you nothing but to cherish & share every second of it with your love ones.
-                            </p>
-                            <p>Mutiara wedding planner organizer is professional in surabaya Indonesia for an unforgetable
-                                dream wedding events organizer in surabaya, we are professional organizer wedding planner
-                                with low price cheap in surabaya - Indonwsia.
-                            </p>
+                            <?php echo $data['about_us_content']; ?>
 
 
 
@@ -135,58 +135,35 @@
 
                         <h1>Wedding packages</h1>
 
-
-                        <div class="column left">
-                            <h2>Gold Package</h2>
-                            <h2>Rp. 19.000.000</h2>
-
-                       <!--     <img src="img/villa-wedding.jpg" class="thumb" alt="Sarah" /> -->
-
-                            <p>1. Siraman<br>
-                               2. Dekorasi kamar pengantin<br>
-                               3. Dekorasi akad nikah<br>
-                               4. Dekorasi pelaminan<br>
-                               5. Pakaian dan rias pengantin<br>
-                               6. Pakaian & rias ibu/bapak/besan<br>
-                               7. Pakaian & rias 2 pasang penerima tamu<br>
-                               8. Pakaian & rias 2 pasang pagar ayu/bagus<br>
-                               9. MC (Siraman, Panggih, Resepsi)<br>
-                               10. Tuwuhan<br>
-                               11. Bunga kembar mayang<br>
-                               12. Penjor<br>
-                               13. Pundi<br>
-                               14. Buku tamu<br>
-                               15. video + foto<br>
-                                </p>
-                            
-
-
-                        </div><!--end column-->
-                        <div class="column right">
-                            <h2>Diamond Package</h2>
-                            <h2>Rp. 29.000.000</h2>
-                           <!-- <img src="img/hotel-wedding.jpg" class="thumb" alt="Sarah" /> -->
-                            <p>
-                                1. Siraman<br>
-                                2. Dekorasi kamar pengantin<br>
-                                3. Dekorasi akad nikah<br>
-                                4. Dekorasi pelaminan<br>
-                                5. Pakaian dan rias pengantin<br>
-                                6. Pakaian & rias ibu/bapak/besan<br>
-                                7. Pakaian & rias 2 pasang penerima tamu<br>
-                                8. Pakaian & rias 2 pasang pagar ayu/bagus<br>
-                                9. MC (Siraman, Panggih, Resepsi)<br>
-                                10. Tuwuhan<br>
-                                11. Bunga kembar mayang<br>
-                                12. Penjor<br>
-                                13. Pundi<br>
-                                14. Buku tamu<br>
-                                15. video + foto<br>
-                                16. Catering 200pax (8 Macam)
-                                17. Band jazz
-                            </p>
-                        </div><!--end column--> 
-
+						<?php
+							try{
+								$db=config::getInstance();
+								$query="SELECT * FROM paket";
+								$stmt=$db->prepare($query);
+								$stmt->execute();
+							}catch (Exception $e){ 
+								$e->getMessage();
+							}
+							$exist = false;
+							$i = 0;
+							while($row=$stmt->fetch()){
+								if($i%2==0)
+								{	?>
+									<div class="column left">
+									<h2><?php echo $row['nama']; ?></h2>
+									<h2><?php echo $row['harga']; ?></h2>
+									<?php echo $row['elemen']; ?>
+									</div>
+						<?php	} else { ?>
+									<div class="column right">
+									<h2><?php echo $row['nama']; ?></h2>
+									<h2><?php echo $row['harga']; ?></h2>
+									<?php echo $row['elemen']; ?>
+									</div>
+						<?php	$i++;
+							}}
+						?>
+                        
                         <div class="clearfix"></div>
 
                         <div class="column full">
@@ -215,14 +192,10 @@
 
                     <section id="accomodations" class="clearfix">
 
-                        <h1>Wedding Planning and Design</h1>
+                        <h1><?php echo $data['service_title']; ?></h1>
 
                         <div class="column left">
-
-
-                            <p>
-                                Perencanaan pernikahan , desain dan manajemen layanan kami disesuaikan dengan anda dan kami bekerja dengan cara apapun yang sesuai dengan Anda, dengan gaya hidup Anda. Pendekatan kami untuk perencanaan pernikahan adalah dipesan lebih dahulu. Kami akan memastikan kami menawarkan tempat dan pemasok yang mencerminkan jenis perayaan yang Anda butuhkan dan sesuai dengan anggaran Anda. Kadang-kadang kita berkoordinasi dan merancang acara Anda sepenuhnya di rumah, atau kita mungkin bekerja dengan desainer acara berdedikasi dan fokus pada koordinasi . Setelah tempat ini dijamin, kita akan bersama-sama mengisi rincian dari upacara dan resepsi desain , bunga , alat tulis , dekorasi dan fotografi.
-                            </p>
+                            <?php echo $data['service_content']; ?>
                         </div><!--end column-->
 
                         <div class="column right">
@@ -240,11 +213,25 @@
 
 						<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 					<script type="text/javascript">
-					var markers = [
-						['UPN Veteran Surabaya', -7.331822,112.789322],
-						['Kantor kami', -7.336844,112.77885],
-						['STIKOM Surabaya', -7.308666,112.782284]
-					];
+					<?php
+						try{
+								$db=config::getInstance();
+								$query="SELECT * FROM map";
+								$stmt=$db->prepare($query);
+								$stmt->execute();
+							}catch (Exception $e){ 
+								$e->getMessage();
+							}
+							$exist = false;
+							$i = 0;
+							while($row=$stmt->fetch()){
+								$map[$i][0] = $row['title'];
+								$map[$i][1] = (double)$row['latitude'];
+								$map[$i][2] = (double)$row['longitude'];
+								$i++;
+							}
+					?>
+					var markers = <?php echo json_encode($map); ?>;
 					function initializeMaps() {
 						var myOptions = {
 							mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -343,198 +330,29 @@
 				</div>
 				<div id="thumbs" class="navigation">
 					<ul class="thumbs noscript">
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38209/Wedding-Gallery-Inspiration-SarahHaywood.com - 04.jpg" title="Title #01">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38209/Wedding-Gallery-Inspiration-SarahHaywood.com - 04.jpg" alt="Title #01" />
+						<?php
+							try{
+								$db=config::getInstance();
+								$query="SELECT * FROM gallery";
+								$stmt=$db->prepare($query);
+								$stmt->execute();
+							}catch (Exception $e){
+								$e->getMessage();
+							}
+							while($row=$stmt->fetch()){ ?>
+							<li>
+							<a class="thumb" href="<?php if(substr($row['link'],0,4)!="http") echo "gallery/".$row['link']; else echo $row['link']; ?>" title="<?php echo $row['title']; ?>">
+								<img src="<?php if(substr($row['link'],0,4)!="http") echo "gallery/".$row['link']; else echo $row['link']; ?>" alt="<?php echo $row['title']; ?>" />
 							</a>
 							<div class="caption">
 								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38209/Wedding-Gallery-Inspiration-SarahHaywood.com - 04.jpg">Download Original</a>
+									<a href="<?php if(substr($row['link'],0,4)!="http") echo "gallery/".$row['link']; else echo $row['link']; ?>">Download Original</a>
 								</div>
-								<div class="image-title">Title #01</div>
-								<div class="image-desc">Description</div>
+								<div class="image-title"><?php echo $row['title']; ?></div>
+								<div class="image-desc"><?php echo $row['desc']; ?></div>
 							</div>
-						</li>
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38214/Wedding-Gallery-Inspiration-SarahHaywood.com - 05.jpg" title="Title #02">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38214/Wedding-Gallery-Inspiration-SarahHaywood.com - 05.jpg" alt="Title #02" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38214/Wedding-Gallery-Inspiration-SarahHaywood.com - 05.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #02</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38219/Wedding-Gallery-Inspiration-SarahHaywood.com - 06.jpg" title="Title #03">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38219/Wedding-Gallery-Inspiration-SarahHaywood.com - 06.jpg" alt="Title #03" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38219/Wedding-Gallery-Inspiration-SarahHaywood.com - 06.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #03</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38224/Wedding-Gallery-Inspiration-SarahHaywood.com - 07.jpg" title="Title #04">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38224/Wedding-Gallery-Inspiration-SarahHaywood.com - 07.jpg" alt="Title #04" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38224/Wedding-Gallery-Inspiration-SarahHaywood.com - 07.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #04</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>			
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38229/Wedding-Gallery-Inspiration-SarahHaywood.com - 08.jpg" title="Title #05">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38229/Wedding-Gallery-Inspiration-SarahHaywood.com - 08.jpg" alt="Title #05" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38229/Wedding-Gallery-Inspiration-SarahHaywood.com - 08.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #05</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38234/Wedding-Gallery-Inspiration-SarahHaywood.com - 09.jpg" title="Title #06">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38234/Wedding-Gallery-Inspiration-SarahHaywood.com - 09.jpg" alt="Title #06" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38234/Wedding-Gallery-Inspiration-SarahHaywood.com - 09.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #06</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38239/Wedding-Gallery-Inspiration-SarahHaywood.com - 10.jpg" title="Title #07">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38239/Wedding-Gallery-Inspiration-SarahHaywood.com - 10.jpg" alt="Title #07" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38239/Wedding-Gallery-Inspiration-SarahHaywood.com - 10.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #07</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>                    
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38244/Wedding-Gallery-Inspiration-SarahHaywood.com - 11.jpg" title="Title #08">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38244/Wedding-Gallery-Inspiration-SarahHaywood.com - 11.jpg" alt="Title #08" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38244/Wedding-Gallery-Inspiration-SarahHaywood.com - 11.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #08</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38249/Wedding-Gallery-Inspiration-SarahHaywood.com - 12.jpg" title="Title #09">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38249/Wedding-Gallery-Inspiration-SarahHaywood.com - 12.jpg" alt="Title #09" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38249/Wedding-Gallery-Inspiration-SarahHaywood.com - 12.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #09</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38254/Wedding-Gallery-Inspiration-SarahHaywood.com - 13.jpg" title="Title #10">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38254/Wedding-Gallery-Inspiration-SarahHaywood.com - 13.jpg" alt="Title #10" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38254/Wedding-Gallery-Inspiration-SarahHaywood.com - 13.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #10</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38259/Wedding-Gallery-Inspiration-SarahHaywood.com - 14.jpg" title="Title #11">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38259/Wedding-Gallery-Inspiration-SarahHaywood.com - 14.jpg" alt="Title #11" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38259/Wedding-Gallery-Inspiration-SarahHaywood.com - 14.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #11</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38264/Wedding-Gallery-Inspiration-SarahHaywood.com - 15.jpg" title="Title #12">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38264/Wedding-Gallery-Inspiration-SarahHaywood.com - 15.jpg" alt="Title #12" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38264/Wedding-Gallery-Inspiration-SarahHaywood.com - 15.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #12</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38269/Wedding-Gallery-Inspiration-SarahHaywood.com - 16.jpg" title="Title #13">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38269/Wedding-Gallery-Inspiration-SarahHaywood.com - 16.jpg" alt="Title #13" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38269/Wedding-Gallery-Inspiration-SarahHaywood.com - 16.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #13</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>                    
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38274/Wedding-Gallery-Inspiration-SarahHaywood.com - 17.jpg" title="Title #14">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38274/Wedding-Gallery-Inspiration-SarahHaywood.com - 17.jpg" alt="Title #14" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38274/Wedding-Gallery-Inspiration-SarahHaywood.com - 17.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #14</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>          
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38284/Wedding-Gallery-Inspiration-SarahHaywood.com - 19.jpg" title="Title #15">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38284/Wedding-Gallery-Inspiration-SarahHaywood.com - 19.jpg" alt="Title #15" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38284/Wedding-Gallery-Inspiration-SarahHaywood.com - 19.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #15</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>                   
-						<li>
-							<a class="thumb" href="http://www.sarahhaywood.com/CropUp/715x450M/media/38289/Wedding-Gallery-Inspiration-SarahHaywood.com - 20.jpg" title="Title #16">
-								<img src="http://www.sarahhaywood.com/CropUp/715x450M/media/38289/Wedding-Gallery-Inspiration-SarahHaywood.com - 20.jpg" alt="Title #16" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://www.sarahhaywood.com/CropUp/715x450M/media/38289/Wedding-Gallery-Inspiration-SarahHaywood.com - 20.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #16</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>                            
+							</li>
+						<?php } ?>                       
 					</ul>
 				</div>
 			</div>

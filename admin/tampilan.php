@@ -47,15 +47,16 @@
         <div id="bg-container">
 
             <div class="header-container"  style="position: relative; margin-top: 30px;">
-                <div id="heading" class="wrapper clearfix">
+                <div id="heading" class="wrapper clearfix" style="width: 1310px">
                     <nav id="nav">
                         <ul>
                             <li><a href="index.php">HOME</a></li>
-							<li><a href="../admin/onthespot.php">RESERVASI</a></li>
-							<li><a href="../admin/pelanggan.php">CUSTOMER</a></li>
-							<li><a href="../admin/reservasi.php">PEMESANAN</a></li>
-							<li><a href="../admin/laporan.php">LAPORAN</a></li>
-							<li><a href="../admin/bukutamu.php">GUEST BOOK</a></li>
+							<li><a href="setting.php">SETTING</a></li>
+							<li><a href="onthespot.php">RESERVASI</a></li>
+							<li><a href="pelanggan.php">CUSTOMER</a></li>
+							<li><a href="reservasi.php">PEMESANAN</a></li>
+							<li><a href="laporan.php">LAPORAN</a></li>
+							<li><a href="bukutamu.php">GUEST BOOK</a></li>
 							<li><a href="logout.php">LOGOUT</a></li>
                         </ul>
 
