@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2014 at 03:53 PM
+-- Generation Time: Mar 04, 2014 at 09:39 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -53,6 +53,68 @@ CREATE TABLE IF NOT EXISTS `buku_tamu` (
   PRIMARY KEY (`ID_TAMU`),
   KEY `FK_MENGISI` (`ID_KONSUMEN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE IF NOT EXISTS `config` (
+  `id_config` int(11) NOT NULL AUTO_INCREMENT,
+  `config_name` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id_config`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`id_config`, `config_name`, `content`) VALUES
+(1, 'about_us_title', 'Mutiara Wedding Organizer'),
+(2, 'about_us_tagline', 'Mutiara Wedding Organizer Luxury Wedding Planning & Event Design.'),
+(3, 'about_us_content', '<p>\r\n	We plan elegant, stylish, glamorous and fun celebrations and are the Luxury Wedding Planners for savvy, sophisticated couples who demand first class service and a world-class event.</p>\r\n<p>\r\n	When you are to be united in the name of love, when you want to celebrate the greatest moment of your life, when you wish to treasure every moment in perfection.</p>\r\n<p>\r\n	Mutiara weddings here for you, in every step of way to bring your wedding dream come to life and let you nothing but to cherish &amp; share every second of it with your love ones.</p>\r\n<p>\r\n	Mutiara wedding planner organizer is professional in surabaya Indonesia for an unforgetable dream wedding events organizer in surabaya, we are professional organizer wedding planner with low price cheap in surabaya - Indonwsia.</p>\r\n'),
+(4, 'service_title', 'Wedding Planning and Design'),
+(5, 'service_content', '<p>\r\n	Perencanaan pernikahan , desain dan manajemen layanan kami disesuaikan dengan anda dan kami bekerja dengan cara apapun yang sesuai dengan Anda, dengan gaya hidup Anda. Pendekatan kami untuk perencanaan pernikahan adalah dipesan lebih dahulu. Kami akan memastikan kami menawarkan tempat dan pemasok yang mencerminkan jenis perayaan yang Anda butuhkan dan sesuai dengan anggaran Anda. Kadang-kadang kita berkoordinasi dan merancang acara Anda sepenuhnya di rumah, atau kita mungkin bekerja dengan desainer acara berdedikasi dan fokus pada koordinasi . Setelah tempat ini dijamin, kita akan bersama-sama mengisi rincian dari upacara dan resepsi desain , bunga , alat tulis , dekorasi dan fotografi.</p>\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `id_gallery` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) DEFAULT NULL,
+  `desc` text,
+  `link` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id_gallery`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`id_gallery`, `title`, `desc`, `link`) VALUES
+(1, 'tes', 'Ini adalah hasil uji coba', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38209/Wedding-Gallery-Inspiration-SarahHaywood.com - 04.jpg'),
+(2, 'Title #02', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38214/Wedding-Gallery-Inspiration-SarahHaywood.com - 05.jpg'),
+(3, 'Title #03', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38219/Wedding-Gallery-Inspiration-SarahHaywood.com - 06.jpg'),
+(4, 'Title #04', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38224/Wedding-Gallery-Inspiration-SarahHaywood.com - 07.jpg'),
+(5, 'Title #05', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38229/Wedding-Gallery-Inspiration-SarahHaywood.com - 08.jpg'),
+(6, 'Title #06', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38234/Wedding-Gallery-Inspiration-SarahHaywood.com - 09.jpg'),
+(7, 'Title #07', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38239/Wedding-Gallery-Inspiration-SarahHaywood.com - 10.jpg'),
+(8, 'Title #08', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38244/Wedding-Gallery-Inspiration-SarahHaywood.com - 11.jpg'),
+(9, 'Title #09', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38249/Wedding-Gallery-Inspiration-SarahHaywood.com - 12.jpg'),
+(10, 'Title #10', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38254/Wedding-Gallery-Inspiration-SarahHaywood.com - 13.jpg'),
+(11, 'Title #11', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38259/Wedding-Gallery-Inspiration-SarahHaywood.com - 14.jpg'),
+(12, 'Title #12', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38264/Wedding-Gallery-Inspiration-SarahHaywood.com - 15.jpg'),
+(13, 'Title #13', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38269/Wedding-Gallery-Inspiration-SarahHaywood.com - 16.jpg'),
+(14, 'Title #14', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38274/Wedding-Gallery-Inspiration-SarahHaywood.com - 17.jpg'),
+(15, 'Title #15', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38284/Wedding-Gallery-Inspiration-SarahHaywood.com - 19.jpg'),
+(16, 'Title #16', 'Description', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38289/Wedding-Gallery-Inspiration-SarahHaywood.com - 20.jpg'),
+(18, 'ade', 'adadwdawdawda', 'http://www.sarahhaywood.com/CropUp/715x450M/media/38229/Wedding-Gallery-Inspiration-SarahHaywood.com%20-%2008.jpg'),
+(20, 'sadasda', 'sadasdasdasda', '19_gallery.png');
 
 -- --------------------------------------------------------
 
@@ -589,6 +651,29 @@ INSERT INTO `kota` (`id_kota`, `id_provinsi`, `nama_kota`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `map`
+--
+
+CREATE TABLE IF NOT EXISTS `map` (
+  `id_map` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  PRIMARY KEY (`id_map`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `map`
+--
+
+INSERT INTO `map` (`id_map`, `title`, `latitude`, `longitude`) VALUES
+(1, 'UPN Veteran Surabaya', -7.331822, 112.789322),
+(2, 'Kantor kami', -7.336844, 112.77885),
+(3, 'STIKOM Surabaya', -7.308666, 112.782284);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `package`
 --
 
@@ -604,6 +689,29 @@ CREATE TABLE IF NOT EXISTS `package` (
 
 INSERT INTO `package` (`id_pemesanan_element`, `elements`) VALUES
 (32, 'vvghvhvhvh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paket`
+--
+
+CREATE TABLE IF NOT EXISTS `paket` (
+  `id_paket` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(100) NOT NULL,
+  `harga` varchar(100) NOT NULL,
+  `elemen` text NOT NULL,
+  PRIMARY KEY (`id_paket`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `paket`
+--
+
+INSERT INTO `paket` (`id_paket`, `nama`, `harga`, `elemen`) VALUES
+(1, 'Gold Package', 'Rp. 39.000.000', '<p>\r\n	1. Siraman<br />\r\n	2. Dekorasi kamar pengantin<br />\r\n	3. Dekorasi akad nikah<br />\r\n	4. Dekorasi pelaminan<br />\r\n	5. Pakaian dan rias pengantin<br />\r\n	6. Pakaian &amp; rias ibu/bapak/besan<br />\r\n	7. Pakaian &amp; rias 2 pasang penerima tamu<br />\r\n	8. Pakaian &amp; rias 2 pasang pagar ayu/bagus<br />\r\n	9. MC (Siraman, Panggih, Resepsi)<br />\r\n	10. Tuwuhan<br />\r\n	11. Bunga kembar mayang<br />\r\n	12. Penjor<br />\r\n	13. Pundi<br />\r\n	14. Buku tamu<br />\r\n	15. video + foto</p>\r\n'),
+(2, 'Diamond Package', 'Rp. 29.000.000', ' <p>\n                                1. Siraman<br>\n                                2. Dekorasi kamar pengantin<br>\n                                3. Dekorasi akad nikah<br>\n                                4. Dekorasi pelaminan<br>\n                                5. Pakaian dan rias pengantin<br>\n                                6. Pakaian & rias ibu/bapak/besan<br>\n                                7. Pakaian & rias 2 pasang penerima tamu<br>\n                                8. Pakaian & rias 2 pasang pagar ayu/bagus<br>\n                                9. MC (Siraman, Panggih, Resepsi)<br>\n                                10. Tuwuhan<br>\n                                11. Bunga kembar mayang<br>\n                                12. Penjor<br>\n                                13. Pundi<br>\n                                14. Buku tamu<br>\n                                15. video + foto<br>\n                                16. Catering 200pax (8 Macam)\n                                17. Band jazz\n                            </p>'),
+(3, 'Silver Package', 'Rp. 10.000.000', '<p>\r\n	1. Siraman<br />\r\n	2. Dekorasi kamar pengantin<br />\r\n	3. Dekorasi akad nikah<br />\r\n	4. Dekorasi pelaminan<br />\r\n	5. Pakaian dan rias pengantin<br />\r\n	6. Pakaian &amp; rias ibu/bapak/besan<br />\r\n	7. Pakaian &amp; rias 2 pasang penerima tamu<br />\r\n	8. Pakaian &amp; rias 2 pasang pagar ayu/bagus<br />\r\n	9. MC (Siraman, Panggih, Resepsi)<br />\r\n	10. Tuwuhan<br />\r\n	11. Bunga kembar mayang<br />\r\n	12. Penjor<br />\r\n	13. Pundi<br />\r\n	14. Buku tamu<br />\r\n	15. video + foto<br />\r\n	16. Catering 200pax (8 Macam)<br />\r\n	17. Band jazz</p>\r\n');
 
 -- --------------------------------------------------------
 
